@@ -1,3 +1,5 @@
+import parcelas.*
+
 class Planta {
 	
 	var property anioObtencion
@@ -14,10 +16,10 @@ class Planta {
 class Menta inherits Planta{
 	const property horasDeSol = 6
 	override method daNuevasSemillas(){
-		return super() && self.altura()>0.4
+		return super() && altura>0.4
 	}
 	method espacioOcupa(){
-		return self.altura() * 3
+		return altura * 3
 	}
 	method esIdeal(parcela){
 		return parcela.superficie()>6
@@ -27,13 +29,13 @@ class Menta inherits Planta{
 class Soja inherits Planta{
 	const property horasDeSol = 6
 	override method horasDeSol(){
-		return if(self.altura()<0.5){6}else if(self.altura().between(0.5,1)){7}else{9}
+		return if(altura<0.5){6}else if(altura.between(0.5,1)){7}else{9}
 	}
 	override method daNuevasSemillas(){
-		return super() && self.anioObtencion()>2007 && self.altura()>1
+		return super() && anioObtencion>2007 && altura>1
 	}
 	method espacioOcupa(){
-		return self.altura()/2
+		return altura/2
 	}
 	method esIdeal(parcela){
 		return parcela.horasDeSol() == self.horasDeSol()
@@ -43,13 +45,14 @@ class Soja inherits Planta{
 class Quinoa inherits Planta{
 	const property horasDeSol
 	override method daNuevasSemillas(){
-		return super() && self.anioObtencion()<2005
+		return super() && anioObtencion<2005
 	}
 	method espacioOcupa(){
 		return 0.5
 	}
 	method esIdeal(parcela){
-		return parcela.plantas().all({p=> p.altura()<= 1.5})
+		return parcela.plantas().all({p=> p.altura()<= 1.5
+		})
 	}
 }
 
